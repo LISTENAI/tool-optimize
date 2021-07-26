@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: '12.x'
       - run: |
-          echo -e "//registry-lpm.listenai.com/:_password=${{ secrets.LPM_ADMIN_TOKEN }}" > .npmrc
-          echo -e "//registry-lpm.listenai.com/:username=lpmadmin" >> .npmrc
-          echo -e "//registry-lpm.listenai.com/:email=lpm.admin@listenai.com" >> .npmrc
+          echo -e "//registry-lpm.listenai.com/:_password=${{ secrets.LPM_ZHUOBIN_TOKEN }}" > .npmrc
+          echo -e "//registry-lpm.listenai.com/:username=zbzhao" >> .npmrc
+          echo -e "//registry-lpm.listenai.com/:email=zbzhao@listenai.com" >> .npmrc
           echo -e "//registry-lpm.listenai.com/:always-auth=true" >> .npmrc
       - run: npm install --registry=https://registry-lpm.listenai.com
       - run: npm publish --registry=https://registry-lpm.listenai.com
