@@ -1,0 +1,42 @@
+{
+	"name": "@tool/optimize",
+	"version": "1.0.1-beta.3",
+	"description": "@tool/optimize 是一个针对csk工程项目的效果优化工具，包含效果测试、自动调优等",
+	"author": "geekBoom <zbzhao@listenai.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon --exec npm run build -w src/ -e ts",
+		"build": "tsc -p .",
+		"prepublish": "del-cli lib && npm run build",
+		"test": "cross-env NODE_ENV=test jest --verbose --testTimeout=10000"
+	},
+	"lisa": {
+		"configPath": "./lib/config.js",
+		"taskPath": "./lib/task.js"
+	},
+	"publishConfig": {
+		"registry": "https://registry-lpm.listenai.com"
+	},
+	"files": [
+		"lib",
+		"tool"
+	],
+	"keywords": [],
+	"devDependencies": {
+		"@types/jest": "^26.0.23",
+		"@types/node": "^15.12.2",
+		"@types/single-line-log": "^1.1.0",
+		"cross-env": "^7.0.3",
+		"del-cli": "*",
+		"jest": "^27.0.4",
+		"nodemon": "*",
+		"ts-jest": "^27.0.3"
+	},
+	"dependencies": {
+		"@generator/lpm-pkg": "^1.0.5",
+		"@iarna/toml": "^2.2.5",
+		"@listenai/lisa_core": "^1.1.5",
+		"iconv-lite": "^0.6.3",
+		"single-line-log": "^1.1.2"
+	}
+}

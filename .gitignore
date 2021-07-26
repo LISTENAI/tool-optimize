@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+.lisa
+lib
+test__project
+*-error.log
+__test__/__project__
