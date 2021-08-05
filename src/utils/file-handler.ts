@@ -1,8 +1,7 @@
-import {fs} from '@listenai/lisa_core'
-import * as TOML from '@iarna/toml'
+import lisa from '@listenai/lisa_core'
 import * as iconv from 'iconv-lite'
 var readLine = require("readline")
-
+const {fs} = lisa
 const fileHandler =  {
     /**
      * 按行读取文件内容

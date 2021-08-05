@@ -1,7 +1,8 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
 
-module.exports = ({application, fs, ...core} = lisa) => {
+module.exports = (core = lisa) => {
+  const {application} = core
   // 更多applicaton的用法，请到核心库文档查阅 https://open.listenai.com/lisacore/index.html
   application.configuration(config => {
     config.addContext('cskOptimize', {

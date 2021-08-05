@@ -1,7 +1,8 @@
-import { fs } from "@listenai/lisa_core"
+import lisa from "@listenai/lisa_core"
 import * as iconv from 'iconv-lite'
 
 export default (targetTxtPath: string) => {
+    const { fs } = lisa
     const info: {
         list: Array<any>;
         recordFormat: string;

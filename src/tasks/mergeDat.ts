@@ -1,12 +1,12 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as os from 'os'
 import * as iconv from 'iconv-lite'
 import * as path from 'path'
-import targetFileInfo from '../utils/targetFileInfo'
 import execTool from '../utils/execTool'
 import ProgressBar from '../utils/progress'
 
-export default ({job, application, fs, cmd, ...core} = lisa) => {
+export default (core = lisa) => {
+  const {job, application, fs} = core
   const MergeDatStep = {
     createMergeDatJSON(){
       const datDirPath = application.context.cskOptimize.audioRecordDat

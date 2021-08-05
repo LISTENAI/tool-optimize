@@ -1,12 +1,12 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
 import * as iconv from 'iconv-lite'
 import * as os from 'os'
-import targetFileInfo from '../utils/targetFileInfo'
 import execTool from '../utils/execTool'
 import ProgressBar from '../utils/progress'
 
-export default ({job, application, fs, cmd, ...core} = lisa) => {
+export default (core = lisa) => {
+  const {job, application, fs} = core
   const AdaptionStep = {
     async createAdaptionThresholdJSON(){
       await fs.mkdirp(application.context.cskOptimize.optimizingPath)

@@ -1,12 +1,12 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as iconv from 'iconv-lite'
 import * as path from 'path'
 import * as os from 'os'
-import targetFileInfo from '../utils/targetFileInfo'
 import execTool from '../utils/execTool'
 import ProgressBar from '../utils/progress'
 
-export default ({job, application, fs, cmd, ...core} = lisa) => {
+export default (core = lisa) => {
+  const {job, application, fs} = core
   const CalAudioTestStep = {
     async createCalAudioTestJSON(testSetInfo?:any){
       const datDirPath = application.context.cskOptimize.audioRecordDat
