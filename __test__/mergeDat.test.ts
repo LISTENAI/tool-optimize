@@ -1,8 +1,9 @@
 import * as path from 'path';
-// import * as lisa from '@listenai/lisa_core'
-import {application, fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import task from '../src/tasks/mergeDat'
 import {projectDir, removeDir, taskLoad} from './res/utils'
+
+const {application, fs, runner} = lisa
 
 const TEST_TYPE = 'mergeDat'
 const TASK_NAME = 'optimize:mergeDat'
@@ -35,9 +36,9 @@ describe('测试：合并dat', () => {
         await fs.copy(path.join(__dirname, './res/audio'), path.join(TEST_DIR, 'optimize/audio_record_dat'))
         // await fs.copy(path.join(__dirname, './res/mainToml/right.toml'), path.join(TEST_DIR, 'target/building/main.toml'))
         // 独立的 task loader
-        const lisa = await taskLoad(task, TEST_DIR)
+        await taskLoad(task, TEST_DIR)
         // 执行task
-        const res = await lisa.runner(TASK_NAME, mockCtx, true)
+        const res = await runner(TASK_NAME, mockCtx, true)
         // 测试结果校验
         console.log(res)
         const mergeDatPath = path.join(application.context.cskOptimize.optimizingPath, 'DAT')

@@ -1,15 +1,10 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
-import execTool from '../utils/execTool'
 
-import { PassThrough } from 'stream';
-import { createInterface } from 'readline';
-import { once } from 'events';
-import * as iconv from 'iconv-lite'
-import * as os from 'os'
 import execCompareTool from '../utils/execCompareTool'
 import ProgressBar from '../utils/progress'
-export default ({job, application, fs, cmd, ...core} = lisa) => {
+export default (core = lisa) => {
+  const {job, application, fs} = core
   const OptimumReportStep = {
     async adaptionThreshold(task:any){
       const params:Array<string> = []

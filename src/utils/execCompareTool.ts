@@ -1,4 +1,4 @@
-import { cmd } from "@listenai/lisa_core"
+import lisa from "@listenai/lisa_core"
 import * as path from 'path'
 import { PassThrough } from 'stream';
 import { createInterface } from 'readline';
@@ -9,6 +9,7 @@ export default async (params: Array<string>, onProcess?: (opts: {
     message: string;
     percent: number;
 }) => void) => {
+    const { cmd } = lisa
     let success = false
     const toolExe = path.join(__dirname, '../../tool/compare_log.exe')
     const exec = cmd(toolExe, params)

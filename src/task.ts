@@ -1,4 +1,5 @@
-import * as lisa from '@listenai/lisa_core'
+import {TaskObject} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import taskLoader from './tasks'
 import tasksPipe from './utils/tasksPipe'
 import * as path from 'path'
@@ -15,7 +16,7 @@ export default (core = lisa) => {
         'optimize:testSet',
         'optimize:testReport'
       ]
-      const _tasks: lisa.TaskObject[] = []
+      const _tasks: TaskObject[] = []
       tasks.forEach(task => {
         if (core.application.tasks.hasOwnProperty(task)) {
           _tasks.push(core.application.tasks[task])
@@ -28,7 +29,7 @@ export default (core = lisa) => {
   core.job('optimize:auto', {
     title: '自动调优',
     task: async (ctx, task) => {
-      let _tasks: lisa.TaskObject[] = []
+      let _tasks: TaskObject[] = []
       _tasks = _tasks.concat([
         {
           title: '自动调优配置准备',

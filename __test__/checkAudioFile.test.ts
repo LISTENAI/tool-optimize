@@ -1,9 +1,9 @@
 import * as path from 'path';
-// import * as lisa from '@listenai/lisa_core'
-import {fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import task from '../src/tasks/checkAudioFile'
 import {projectDir, removeDir, taskLoad} from './res/utils'
 
+const {fs, runner} = lisa
 const TEST_TYPE = 'checkAudioFile'
 const TASK_NAME = 'optimize:ready'
 
@@ -19,12 +19,12 @@ describe('测试：执行前准备', () => {
         await fs.copy(path.join(__dirname, './res/projectPackage.json'), path.join(TEST_DIR, 'package.json'))
         await fs.copy(path.join(__dirname, './res/@algo'), path.join(TEST_DIR, 'node_modules/@algo'))
         // 独立的 task loader
-        const lisa = await taskLoad(task, TEST_DIR)
+        await taskLoad(task, TEST_DIR)
         // 执行task
         const baseCwd = process.cwd()
 
         process.chdir(TEST_DIR)
-        const res = await lisa.runner(TASK_NAME, {}, true)
+        const res = await runner(TASK_NAME, {}, true)
         process.chdir(baseCwd)
         // 测试结果校验
         expect(res && (res as any).datReady).toEqual(true)

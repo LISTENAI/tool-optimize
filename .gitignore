@@ -4,4 +4,5 @@ node_modules
 lib
 test__project
 *-error.log
+*-lock.log
 __test__/__project__

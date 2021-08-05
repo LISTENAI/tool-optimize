@@ -1,13 +1,13 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
-import execTool from '../utils/execTool'
 
 import { PassThrough } from 'stream';
 import { createInterface } from 'readline';
 import { once } from 'events';
 import * as iconv from 'iconv-lite'
 
-export default ({job, application, fs, cmd, ...core} = lisa) => {
+export default (core = lisa) => {
+  const {job, application, fs, cmd} = core
   const TestReportStep = {
     async testReport(){
       const transferLogPath = path.join(__dirname,'../../tool/transfer_log')

@@ -1,9 +1,10 @@
 import * as path from 'path';
-// import * as lisa from '@listenai/lisa_core'
-import {application, fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import task from '../src/tasks/adaptionThreshold'
 import testSetTask from '../src/tasks/calAudioForTest'
-import {projectDir, projectDirSync, removeDir, taskLoad} from './res/utils'
+import {projectDirSync, removeDir, taskLoad} from './res/utils'
+
+const {application, fs, runner} = lisa
 
 const TEST_TYPE = 'adaptionThreshold'
 const TASK_NAME = 'optimize:adaptionThreshold'
@@ -53,9 +54,9 @@ describe('测试 生成测试集', () => {
         await fs.copy(path.join(__dirname, './res/mainToml/esr.bin'), path.join(TEST_DIR, 'target/building/esr.bin'))
         // await fs.copy(path.join(__dirname, './res/mainToml/right.toml'), path.join(TEST_DIR, 'target/building/main.toml'))
         // 独立的 task loader
-        const lisa = await taskLoad([task,testSetTask], TEST_DIR)
+        await taskLoad([task,testSetTask], TEST_DIR)
         // 执行task
-        const res = await lisa.runner([TASK_NAME,TEST_TASK_NAME].join(','), mockCtx, true)
+        const res = await runner([TASK_NAME,TEST_TASK_NAME].join(','), mockCtx, true)
         // 测试结果校验
         console.log(res)
         const adaptionThresholdPath = path.join(application.context.cskOptimize.optimizingPath, 'adaptionThreshold')

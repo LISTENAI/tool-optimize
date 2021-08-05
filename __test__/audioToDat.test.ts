@@ -1,8 +1,9 @@
 import * as path from 'path';
-// import * as lisa from '@listenai/lisa_core'
-import {application, fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import task from '../src/tasks/audioToDat'
 import {projectDir, removeDir, taskLoad} from './res/utils'
+
+const {application, fs, runner} = lisa
 
 const TEST_TYPE = 'audioToDat'
 const TASK_NAME = 'optimize:audioToDat'
@@ -38,9 +39,9 @@ describe('测试：音频转dat', () => {
         await fs.copy(path.join(__dirname, './res/mainToml/main_train.txt'), path.join(TEST_DIR, 'target/building/main_train.txt'))
         await fs.copy(path.join(__dirname, './res/mainToml/mlp.bin'), path.join(TEST_DIR, 'target/building/mlp.bin'))
         // 独立的 task loader
-        const lisa = await taskLoad(task, TEST_DIR)
+        await taskLoad(task, TEST_DIR)
         // 执行task
-        const res = await lisa.runner(TASK_NAME, mockCtx, true)
+        const res = await runner(TASK_NAME, mockCtx, true)
         // 测试结果校验
         console.log(res)
 

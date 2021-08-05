@@ -1,8 +1,9 @@
 import * as path from 'path';
-// import * as lisa from '@listenai/lisa_core'
-import {application, fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import task from '../src/tasks/testReport'
 import {projectDir, removeDir, taskLoad} from './res/utils'
+
+const {application, fs, runner} = lisa
 
 const TEST_TYPE = 'testReport'
 const TASK_NAME = 'optimize:testReport'
@@ -39,9 +40,9 @@ describe('测试 生成测试报告', () => {
         await fs.copy(path.join(__dirname, './res/mainToml/mlp.bin'), path.join(TEST_DIR, 'target/building/mlp.bin'))
         // await fs.copy(path.join(__dirname, './res/mainToml/right.toml'), path.join(TEST_DIR, 'target/building/main.toml'))
         // 独立的 task loader
-        const lisa = await taskLoad(task, TEST_DIR)
+        await taskLoad(task, TEST_DIR)
         // 执行task
-        const res = await lisa.runner(TASK_NAME, mockCtx, true)
+        const res = await runner(TASK_NAME, mockCtx, true)
         // 测试结果校验
         console.log(res)
         const projectOutputPath = path.join(application.context.cskOptimize.testReportPath,'optimize_report.csk')

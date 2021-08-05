@@ -1,13 +1,13 @@
-import { AnyJson, JsonArray, JsonMap } from '@iarna/toml'
-import * as lisa from '@listenai/lisa_core'
+import { JsonArray } from '@iarna/toml'
+import lisa from '@listenai/lisa_core'
+import {parsePackageJSON} from '@listenai/lisa_core'
 import * as path from 'path'
 import tomlHandler from '../utils/toml-handler'
 import fileHandler from '../utils/file-handler'
 import targetFileInfo from '../utils/targetFileInfo'
 
-
-export default ({job, application, fs, cmd, ...core} = lisa) => {
-
+export default (core = lisa) => {
+  const {job, application, fs} = core
   const ReadyStep = {
     mainTomlConfigCheck(ctx:any){
       const main_toml_config = tomlHandler.parse(path.join(application.context.cskBuild.buildingPath, 'main.toml'))
@@ -22,9 +22,9 @@ export default ({job, application, fs, cmd, ...core} = lisa) => {
         ctx.recordFormat = targetInfo.recordFormat
         let datExist = true 
         
-        const projectPackageJson = lisa.parsePackageJSON()
+        const projectPackageJson = parsePackageJSON()
         const algo = Object.keys(projectPackageJson.dependencies).find(item => item.indexOf('@algo/') >= 0)
-        const algoPackageJson = lisa.parsePackageJSON(
+        const algoPackageJson = parsePackageJSON(
           path.join(process.cwd(), `node_modules/${algo}/package.json`)
         )
 

@@ -1,5 +1,7 @@
-import {fs} from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
+
+const {fs, application} = lisa
 
 const projectDir = async (type: string) => {
     const _projectDir = path.join(__dirname, '../__project__')
@@ -22,11 +24,10 @@ const removeDir = async (type: string) => {
 }
 
 const taskLoad = async (task: any, project: string) => {
-    const lisa = await import('@listenai/lisa_core')
-    lisa.application.addContext('cskBuild', {
+    application.addContext('cskBuild', {
         buildingPath: path.join(project, 'target/building'),
     });
-    lisa.application.addContext('cskOptimize', {
+    application.addContext('cskOptimize', {
         audioRecordDat: path.join(project, 'optimize/audio_record_dat'),
         audioRecord: path.join(project, 'optimize/audio_record'),
         optimizingPath: path.join(project, 'target/optimizing'),

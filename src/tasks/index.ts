@@ -1,4 +1,4 @@
-import * as lisa from '@listenai/lisa_core'
+import lisa from '@listenai/lisa_core'
 import * as path from 'path'
 
 function taskLoader(core = lisa, dirPath?: string) {
