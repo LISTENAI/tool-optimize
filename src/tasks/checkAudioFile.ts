@@ -17,11 +17,6 @@ export default (core = lisa) => {
     },
     async datCheck(ctx:any){
       try {
-        const targetInfo = await targetFileInfo(path.join(application.context.cskOptimize.audioRecordDat, 'target.txt'))
-        ctx.target = targetInfo?.list || []
-        ctx.recordFormat = targetInfo.recordFormat
-        let datExist = true 
-        
         const projectPackageJson = parsePackageJSON()
         const algo = Object.keys(projectPackageJson.dependencies).find(item => item.indexOf('@algo/') >= 0)
         const algoPackageJson = parsePackageJSON(
@@ -32,6 +27,11 @@ export default (core = lisa) => {
           name: algoPackageJson.name,
           version: algoPackageJson.version,
         }
+
+        const targetInfo = await targetFileInfo(path.join(application.context.cskOptimize.audioRecordDat, 'target.txt'))
+        ctx.target = targetInfo?.list || []
+        ctx.recordFormat = targetInfo.recordFormat
+        let datExist = true 
 
         const algoVersionFile = path.join(application.context.cskOptimize.audioRecordDat, 'algoVersion')
         if (!fs.existsSync(algoVersionFile)) {
