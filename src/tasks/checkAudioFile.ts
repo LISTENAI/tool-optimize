@@ -54,7 +54,7 @@ export default (core = lisa) => {
           const audioRecordDat_fileExist = fs.existsSync(audioRecordDat_file)
           if (!audioRecordDat_fileExist) {
             application.log(`【-】该文件DAT缺失 ： ${audioFileName} | ${audioRecordDat_file} | ${audioRecordDat_fileExist}`)
-            // throw new Error('不存在对应的dat文件：'+audioFileName)
+            datExist = false
           }
           // else{
           //   application.log(`【+】 ： ${audioFileName} | ${audioRecordDat_file} | ${audioRecordDat_fileExist}`)
