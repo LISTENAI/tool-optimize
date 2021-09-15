@@ -46,6 +46,24 @@ export default (core = lisa) => {
     // 如果ctx.datReady为true，即dat文件已经准备好，则跳过该task
     skip: ctx => ctx.datReady === true,
     task: async (ctx, task) => {
+      //判断mustToDat
+      const mustToDat = ctx.mustToDat || false
+      application.log(`mustToDat : ${mustToDat}`)
+      if (!mustToDat){
+        const datDirPath = path.join(application.context.cskOptimize.audioRecordDat, 'DAT')
+        const datIsExit = fs.existsSync(datDirPath)
+        const datFiles = fs.readdirSync(datDirPath)
+        if (datIsExit && datFiles.length > 0){
+          const regenerate = await task.prompt<boolean>({
+            type: 'Toggle',
+            message: '检查到资源异常，将重新生成Dat文件，是否继续？'
+          })
+          if (!regenerate){
+            throw new Error('用户结束本次操作！')
+          }
+        }
+      }
+
       const audioRecord = application.context.cskOptimize.audioRecord
       const audioRecordDat = application.context.cskOptimize.audioRecordDat
       // 1、清空application.context.cskOptimize.audioRecordDat目录
