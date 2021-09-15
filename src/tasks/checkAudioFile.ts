@@ -35,12 +35,14 @@ export default (core = lisa) => {
 
         const algoVersionFile = path.join(application.context.cskOptimize.audioRecordDat, 'algoVersion')
         if (!fs.existsSync(algoVersionFile)) {
-          throw new Error('algo包版本缺失')
+          ctx.mustToDat = true
+          // throw new Error('algo包版本缺失')
         }
         const algoVersionJson = JSON.parse(fs.readFileSync(algoVersionFile).toString())
 
         if (algoPackageJson.name !== algoVersionJson.name || algoPackageJson.version !== algoVersionJson.version) {
-          throw new Error('algo包不一致')
+          ctx.mustToDat = true
+          // throw new Error('algo包不一致')
         }
 
         ctx.target.forEach((item: {
