@@ -1,6 +1,6 @@
 {
 	"name": "@tool/optimize",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "@tool/optimize 是一个针对csk工程项目的效果优化工具，包含效果测试、自动调优等",
 	"author": "geekBoom <zbzhao@listenai.com>",
 	"license": "MIT",
