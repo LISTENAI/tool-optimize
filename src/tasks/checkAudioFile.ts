@@ -22,7 +22,7 @@ export default (core = lisa) => {
         const algoPackageJson = parsePackageJSON(
           path.join(process.cwd(), `node_modules/${algo}/package.json`)
         )
-
+        application.log(`datCheck algo :${algo} | ${JSON.stringify(algoPackageJson)}`)
         ctx.algoVersionJson = {
           name: algoPackageJson.name,
           version: algoPackageJson.version,
@@ -52,15 +52,18 @@ export default (core = lisa) => {
           const datDirPath = path.join(application.context.cskOptimize.audioRecordDat, 'DAT')
           const audioRecordDat_file = path.join(datDirPath, `dat_${audioFileName}__data.dat`)
           const audioRecordDat_fileExist = fs.existsSync(audioRecordDat_file)
-          // application.log(`>>> ： ${audioFileName} | ${audioRecordDat_file} | ${audioRecordDat_fileExist}`)
           if (!audioRecordDat_fileExist) {
-            throw new Error('不存在对应的dat文件')
+            application.log(`【-】该文件DAT缺失 ： ${audioFileName} | ${audioRecordDat_file} | ${audioRecordDat_fileExist}`)
+            datExist = false
           }
+          // else{
+          //   application.log(`【+】 ： ${audioFileName} | ${audioRecordDat_file} | ${audioRecordDat_fileExist}`)
+          // }
         })
         
         return {'exist':datExist, 'array':ctx.target}
-      } catch (error) {
-        application.log(error.message)
+      } catch (error:any) {
+        application.log(`datCheck error :${error.message}`)
         return {'exist': false, 'array': []}
       }
     },
